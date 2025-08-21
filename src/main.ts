@@ -5,7 +5,7 @@ let guitars = ['Strat' , 'Les Paul' , 5150]
 let mixedData = ['EVH' , 1984 , true]
 
 stringArr[0] = '33';
-stringArr.push('Patel');
+stringArr.push('Patel');  //-----//-------|-|------\\-------\\
 
 console.log(stringArr);
 
@@ -24,7 +24,7 @@ mixed = myTuple; //WORKS cuz of it being a union type which the tupleHas
 
 // myTuple = mixed; // mixed COULD be less than 3 size 
 
-//OBJECTS
+// OBJECTS
 
 let myObj : object;
 myObj = [];
@@ -40,7 +40,7 @@ const exampleObj = {
 exampleObj.prop1 = 'Patel';
 exampleObj.prop2 = false;
 
-type Guitarist = {
+interface Guitarist  {
     name: string;
     active?: boolean; //optional 
     albums : (string | number)[]
@@ -48,6 +48,27 @@ type Guitarist = {
 
 let evh:Guitarist = {
     name :"Yaksh", 
-    active : true,
+    // active : true,
     albums : ['its lit' , 2003]
+}
+
+const greetGuitarist = (guitarist:Guitarist) => {
+    console.log(guitarist.name.toLowerCase())
+    if(guitarist.active){
+        console.log('He exists');
+
+    }
+}
+
+greetGuitarist(evh);
+
+//Enums 
+
+enum Grade {
+    A = 2,
+    B,
+    C,
+    D,
+    E,
+    F
 }

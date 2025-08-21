@@ -9,10 +9,19 @@ declare const exampleObj: {
     prop1: string;
     prop2: boolean;
 };
-type Guitarist = {
+interface Guitarist {
     name: string;
     active?: boolean;
     albums: (string | number)[];
-};
+}
 declare let evh: Guitarist;
+declare const greetGuitarist: (guitarist: Guitarist) => void;
+declare enum Grade {
+    A = 2,
+    B = 3,
+    C = 4,
+    D = 5,
+    E = 6,
+    F = 7
+}
 //# sourceMappingURL=main.d.ts.map
