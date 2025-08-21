@@ -1,27 +1,18 @@
-declare let stringArr: string[];
-declare let guitars: (string | number)[];
-declare let mixedData: (string | number | boolean)[];
-declare let newArr: string[];
-declare let myTuple: [string, number, boolean];
-declare let mixed: (string | number | boolean)[];
-declare let myObj: object;
-declare const exampleObj: {
-    prop1: string;
-    prop2: boolean;
-};
+type StringOrNumber = string | number;
+type StringOrNumberArray = (string | number)[];
 interface Guitarist {
     name: string;
     active?: boolean;
-    albums: (string | number)[];
+    albums: StringOrNumberArray;
 }
-declare let evh: Guitarist;
-declare const greetGuitarist: (guitarist: Guitarist) => void;
-declare enum Grade {
-    A = 2,
-    B = 3,
-    C = 4,
-    D = 5,
-    E = 6,
-    F = 7
-}
+type UserId = StringOrNumber;
+declare let myName: 'Yaksh';
+declare let userName: 'John' | 'Robert' | 'Bran';
+declare const add: (a: number, b: number) => number;
+declare const logMsg: (message: string | number) => void;
+declare let subtract: (c: number, d: number) => number;
+type MathFunction = (a: number, b: number) => number;
+declare let multiply: MathFunction;
+declare const addAll: (a: number, b: number, c?: number) => number;
+declare const sumAll: (a: number, b: number, c?: number) => number;
 //# sourceMappingURL=main.d.ts.map

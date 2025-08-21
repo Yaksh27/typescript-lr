@@ -1,74 +1,75 @@
-let stringArr = ["one" , "hey" , "Yaksh"]
-
-let guitars = ['Strat' , 'Les Paul' , 5150]
-
-let mixedData = ['EVH' , 1984 , true]
-
-stringArr[0] = '33';
-stringArr.push('Patel');  //-----//-------|-|------\\-------\\
-
-console.log(stringArr);
-
-guitars[0] = 1984;
-guitars.unshift('Unshift')
-console.log(guitars);
-
-let newArr:string[] = [];
-newArr.push('String push will work');
-
-// tuples 
-let myTuple : [string,number,boolean] = ['Yaksh', 27 , true];
-let mixed = ['Patel' , 1 , false]
-
-mixed = myTuple; //WORKS cuz of it being a union type which the tupleHas
-
-// myTuple = mixed; // mixed COULD be less than 3 size 
-
-// OBJECTS
-
-let myObj : object;
-myObj = [];
-
-console.log(typeof myObj)
+//Type aliases
+//CANNOT DO THIS WITH INTERFACES. 
 
 
-const exampleObj = {
-    prop1: 'Yaksh',
-    prop2 : true,
-}
+type StringOrNumber = string | number 
 
-exampleObj.prop1 = 'Patel';
-exampleObj.prop2 = false;
+
+type StringOrNumberArray = (string | number)[]
+
 
 interface Guitarist  {
     name: string;
     active?: boolean; //optional 
-    albums : (string | number)[]
+    albums : StringOrNumberArray
 }
 
-let evh:Guitarist = {
-    name :"Yaksh", 
-    // active : true,
-    albums : ['its lit' , 2003]
+type UserId = StringOrNumber
+
+// literal types 
+let myName : 'Yaksh'
+
+// myName = 'Patel' // won't work this is bad.
+
+let userName : 'John' | 'Robert' | 'Bran'
+userName = 'John'
+
+//functions 
+
+const add = (a:number,b:number) : number => {
+    return a+b;
 }
 
-const greetGuitarist = (guitarist:Guitarist) => {
-    console.log(guitarist.name.toLowerCase())
-    if(guitarist.active){
-        console.log('He exists');
+const logMsg = (message:string | number): void => { 
+    console.log(message);
+}
 
+logMsg('hello...')
+logMsg('hello...')
+// logMsg(add(2,3)); will log 5 but shows error too in editor
+
+let subtract = function( c:number, d:number):number {
+
+     return c-d;
+    
+};
+
+type MathFunction = (a:number, b:number) => number;
+
+// interface MathFunction2 {
+//     (a:number, b:number) : number
+// }
+
+let multiply : MathFunction = function(c,d,){    
+    return c*d
+}
+logMsg(multiply(3,4))
+
+//optional parameters 
+
+const addAll = (a:number, b:number , c?:number) : number=> { 
+    if(typeof c!== 'undefined'){
+        return a+b+c
     }
+    return a+b
 }
 
-greetGuitarist(evh);
+//default parameters (cannot achieve with type aliases or interfaces.)
 
-//Enums 
-
-enum Grade {
-    A = 2,
-    B,
-    C,
-    D,
-    E,
-    F
+const sumAll = (a:number, b:number , c:number = 2) : number=> { 
+    return a+b+c;
 }
+
+logMsg(addAll(2,2,3))
+logMsg(addAll(2,2))
+logMsg(sumAll(2,3))

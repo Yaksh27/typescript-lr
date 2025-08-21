@@ -1,50 +1,43 @@
 "use strict";
-let stringArr = ["one", "hey", "Yaksh"];
-let guitars = ['Strat', 'Les Paul', 5150];
-let mixedData = ['EVH', 1984, true];
-stringArr[0] = '33';
-stringArr.push('Patel'); //-----//-------|-|------\\-------\\
-console.log(stringArr);
-guitars[0] = 1984;
-guitars.unshift('Unshift');
-console.log(guitars);
-let newArr = [];
-newArr.push('String push will work');
-// tuples 
-let myTuple = ['Yaksh', 27, true];
-let mixed = ['Patel', 1, false];
-mixed = myTuple; //WORKS cuz of it being a union type which the tupleHas
-// myTuple = mixed; // mixed COULD be less than 3 size 
-// OBJECTS
-let myObj;
-myObj = [];
-console.log(typeof myObj);
-const exampleObj = {
-    prop1: 'Yaksh',
-    prop2: true,
+//Type aliases
+//CANNOT DO THIS WITH INTERFACES. 
+// literal types 
+let myName;
+// myName = 'Patel' // won't work this is bad.
+let userName;
+userName = 'John';
+//functions 
+const add = (a, b) => {
+    return a + b;
 };
-exampleObj.prop1 = 'Patel';
-exampleObj.prop2 = false;
-let evh = {
-    name: "Yaksh",
-    // active : true,
-    albums: ['its lit', 2003]
+const logMsg = (message) => {
+    console.log(message);
 };
-const greetGuitarist = (guitarist) => {
-    console.log(guitarist.name.toLowerCase());
-    if (guitarist.active) {
-        console.log('He exists');
+logMsg('hello...');
+logMsg('hello...');
+// logMsg(add(2,3)); will log 5 but shows error too in editor
+let subtract = function (c, d) {
+    return c - d;
+};
+// interface MathFunction2 {
+//     (a:number, b:number) : number
+// }
+let multiply = function (c, d) {
+    return c * d;
+};
+logMsg(multiply(3, 4));
+//optional parameters 
+const addAll = (a, b, c) => {
+    if (typeof c !== 'undefined') {
+        return a + b + c;
     }
+    return a + b;
 };
-greetGuitarist(evh);
-//Enums 
-var Grade;
-(function (Grade) {
-    Grade[Grade["A"] = 2] = "A";
-    Grade[Grade["B"] = 3] = "B";
-    Grade[Grade["C"] = 4] = "C";
-    Grade[Grade["D"] = 5] = "D";
-    Grade[Grade["E"] = 6] = "E";
-    Grade[Grade["F"] = 7] = "F";
-})(Grade || (Grade = {}));
+//default parameters (cannot achieve with type aliases or interfaces.)
+const sumAll = (a, b, c = 2) => {
+    return a + b + c;
+};
+logMsg(addAll(2, 2, 3));
+logMsg(addAll(2, 2));
+logMsg(sumAll(2, 3));
 //# sourceMappingURL=main.js.map
