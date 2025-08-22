@@ -1,9 +1,7 @@
 //Type aliases
 //CANNOT DO THIS WITH INTERFACES. 
 
-
 type StringOrNumber = string | number 
-
 
 type StringOrNumberArray = (string | number)[]
 
@@ -14,7 +12,7 @@ interface Guitarist  {
     albums : StringOrNumberArray
 }
 
-type UserId = StringOrNumber
+type UserId = StringOrNumber //type can be type
 
 // literal types 
 let myName : 'Yaksh'
@@ -55,7 +53,7 @@ let multiply : MathFunction = function(c,d,){
 }
 logMsg(multiply(3,4))
 
-//optional parameters 
+// optional parameters 
 
 const addAll = (a:number, b:number , c?:number) : number=> { 
     if(typeof c!== 'undefined'){
@@ -64,12 +62,48 @@ const addAll = (a:number, b:number , c?:number) : number=> {
     return a+b
 }
 
-//default parameters (cannot achieve with type aliases or interfaces.)
+// default parameters (cannot achieve with type aliases or interfaces.)
 
-const sumAll = (a:number, b:number , c:number = 2) : number=> { 
+const sumAll = (a:number, b:number , c:number = 2) : number => { 
     return a+b+c;
 }
 
 logMsg(addAll(2,2,3))
 logMsg(addAll(2,2))
 logMsg(sumAll(2,3))
+
+//rest parameter 
+
+const total = (a:number, ...nums : number[]): number =>{
+    return a + nums.reduce((prev, curr) => prev + curr)
+}
+
+logMsg(total(1,2,3,4))
+
+//never type - functions that explicity throw errors.
+const createError = (errMsg : string) : never =>{
+    throw new Error(errMsg)
+}
+
+const infinite = () => {
+    let i: number = 1
+    while(true){
+        i++
+        //prevent return type from NEVER - endless loop
+        if(i>100) break
+    }
+}
+
+const isNumber = (value : any) : boolean => { 
+    return typeof value === 'number' ? true : false
+
+}
+
+const numberOrString = (value: number | string): string => { 
+    if (typeof value === 'string') return 'string'
+    if (isNumber(value) ) return 'number'
+    return createError('this should never happen')
+}
+
+
+
